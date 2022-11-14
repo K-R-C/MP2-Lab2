@@ -103,12 +103,16 @@ while True:
     line = ser.read()    
     print('line = ', line.decode())    
     if line.decode() == "d":
+        ser.flushInput()
         go_down()   
     elif line.decode() == "u":
+        ser.flushInput()
         go_up()
     elif line.decode() == "l":
+        ser.flushInput()
         go_left()
     elif line.decode() == "r":
+        ser.flushInput()
         go_right()
   
     # Check for a collision with the border
@@ -136,14 +140,12 @@ while True:
 
     # Check for a collision with the food
     if line.decode() == "z":
+        ser.flushInput()
         food.color("gold")
-        score += 20
+        score += 10
 
     if head.distance(food) < 20:
         ser.write(b'1');
-        if line.decode() == "z":
-            food.color("gold")
-            score += 10
         
         # TODO: notes by Prof. Luo
         # you need to send a flag to Arduino indicating an apple is eaten
